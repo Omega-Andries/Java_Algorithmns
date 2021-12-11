@@ -1,0 +1,21 @@
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Anagram {
+
+	public static void main(String[] args) {
+		System.out.println(makeAnagram("Omega","agemO"));
+	}
+	
+	static int makeAnagram(String a, String b) {
+		char letter = 'a';
+		int removals = 0;
+		
+		
+		
+		return removals;
+	}
+	
+   
+}

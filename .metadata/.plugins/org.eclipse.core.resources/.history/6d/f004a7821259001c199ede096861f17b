@@ -1,0 +1,115 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class ALG_GRD_002a {
+	
+	private static Scanner scanInput = new Scanner(System.in);
+	
+	//make important variables accesseble by all functions in the class
+	private static int a;
+	private static int b;
+	private static int q;
+	
+	//this will help in displaying as the questions suggests
+	private static List<Integer> theCurrentOf1 = new ArrayList<>();
+
+	private static List<Integer> theCurrentOf2 = new ArrayList<>();
+	public static void main(String[] args) {
+		/**
+		 * Prompt users to insert values they require (a, b and q)
+		 * 
+		 */
+		
+		enterValues();
+		
+	}
+	
+	private static void validateEnteredVariables() {
+		if(a < 1) {
+			System.err.println("Please ensure a is greater or equal to one");
+			enterValues();
+		}else if(a >= b) {
+			System.err.println("Please ensure a is less than b");
+			enterValues();
+		}else if((b-a +1)%q != 0) {
+			System.err.println("Please ensure that (b-a+1) is divisible by q");
+			enterValues();
+		}else {
+			//hence everything is in order and we can continue
+			
+			//create arrays containing answers before display
+			List<Integer>  sum1 = doCalculations1();
+			List<Integer>  sum2 = doCalculations2();
+			
+			//lastly, display
+			displayAnswers(sum1, sum2);
+		}
+		
+		
+	}
+	
+	private static void enterValues() {
+		System.out.print("Please provide the minimum whole number ('a'): ");a = scanInput.nextInt();
+		System.out.println();//For neatness reasons i prefere to skip a line
+		System.out.print("Please provide the maximum whole number ('b'): ");b = scanInput.nextInt();
+		System.out.println();
+		System.out.print("Please provide batching constant ('q'): "); q = scanInput.nextInt();
+		System.out.println();
+		//validate the entered values
+		validateEnteredVariables();
+	}
+	
+	private static List<Integer> doCalculations1() {
+		List<Integer>  sum1 = new ArrayList<Integer>();
+		int currentAt1 = a;
+		int currentAt2 = (currentAt1 -1) + q;
+		
+		//adding b by 1 because i need to do calculations even if i reach 500, or whatever b the user will provide.
+		while (currentAt2 < (b+1)) {
+			
+			int total1 = 0;
+			for(int t = currentAt1; t <= currentAt2; t++) {
+				total1 += t;
+			}
+			sum1.add(total1);
+			theCurrentOf1.add(currentAt1);
+			theCurrentOf2.add(currentAt2);
+			currentAt1 += 40;
+			currentAt2 = (currentAt1 -1) + q;
+		}
+		return sum1;
+	}
+	
+	private static List<Integer> doCalculations2() {
+		List<Integer>  sum2 = new ArrayList<Integer>();
+		int currentAt1 = a;
+		int currentAt2 = (currentAt1 -1) + q;
+		
+		//adding b by 1 because i need to do calculations even if i reach 500, or whatever b the user will provide.
+		while (currentAt2 < (b+1)) {
+			
+			int total1 = 0;
+			//same as function 1 but instead of looping from current incremental, we are looping from 'a'...... THE ORIGINAL
+			for(int t = a; t <= currentAt2; t++) {
+				total1 += t;
+			}
+			sum2.add(total1);
+			
+			currentAt1 += 40;
+			currentAt2 = (currentAt1 -1) + q;
+		}
+		return sum2;
+	}
+	
+	private static void displayAnswers(List<Integer> sum1, List<Integer> sum2) {
+		for(int i = 0; i < sum1.size(); i++) {
+			System.out.println("Sum from " + theCurrentOf1.get(i) + " to " + theCurrentOf2.get(i)+": " + sum1.get(i));
+			System.out.println("Sum from " + a + " to " + theCurrentOf2.get(i)+": " + sum2.get(i));
+			
+			//Like i said, skipping lines is best to keep information on terminal neat
+			System.out.println();
+			System.out.println();
+		}
+	}
+}

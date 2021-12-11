@@ -1,0 +1,30 @@
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class Solution {
+
+	public static void main(String[] args) {
+		int arr[][] = new int[6][6];
+		String[] str = {"-9, -9, -9,  1, 1, 1"," 0, -9,  0,  4, 3, 2","-9, -9, -9,  1, 2, 3",
+				" 0,  0,  8,  6, 6, 0"," 0,  0,  0, -2, 0, 0"," 0,  0,  1,  2, 4, 0"};
+		Scanner sc = new Scanner(System.in);
+		for(int i =0; i < 6; i++) {
+			StringTokenizer strTk = new StringTokenizer(str[i], ", ");
+			for(int j = 0 ; j < 6; j++) {
+				int value = Integer.parseInt(strTk.nextToken());
+				arr[i][j] = value;
+			}
+		}
+		
+		System.out.println(hourglassSum(arr));
+		sc.close();
+	}
+	
+	public static String hourglassSum(int arr[][]) {
+		String hGlasses = "";
+		
+		return hGlasses;
+	}
+	
+	
+}

@@ -1,0 +1,96 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class ALG_GRD_002a {
+	
+	private static Scanner scanInput = new Scanner(System.in);
+	
+	//make important variables accesseble by all functions in the class
+	private static int a;
+	private static int b;
+	private static int q;
+	
+	public static void main(String[] args) {
+		/**
+		 * Prompt users to insert values they require (a, b and q)
+		 * 
+		 */
+		
+		enterValues();
+		
+	}
+	
+	private static void validateEnteredVariables() {
+		if(a < 1) {
+			System.err.println("Please ensure a is greater or equal to one");
+			enterValues();
+		}else if(a >= b) {
+			System.err.println("Please ensure a is less than b");
+			enterValues();
+		}else if((b-a +1)%q != 0) {
+			System.err.println("Please ensure that (b-a+1) is divisible by q");
+			enterValues();
+		}else {
+			//hence everything is in order and we can continue
+			
+			//create arrays containing answers before display
+			List<Integer>  sum1 = doCalculations1();
+			List<Integer>  sum2 = doCalculations2();
+			System.out.println(sum2.toString());
+		}
+		
+		
+	}
+	
+	private static void enterValues() {
+		System.out.print("Please provide the minimum whole number ('a'): ");a = scanInput.nextInt();
+		System.out.println();//For neatness reasons i prefere to skip a line
+		System.out.print("Please provide the maximum whole number ('b'): ");b = scanInput.nextInt();
+		System.out.println();
+		System.out.print("Please provide batching constant ('q'): "); q = scanInput.nextInt();
+		System.out.println();
+		//validate the entered values
+		validateEnteredVariables();
+	}
+	
+	private static List<Integer> doCalculations1() {
+		List<Integer>  sum1 = new ArrayList<Integer>();
+		int currentAt1 = a;
+		int currentAt2 = (currentAt1 -1) + q;
+		
+		//adding b by 1 because i need to do calculations even if i reach 500, or whatever b the user will provide.
+		while (currentAt2 < (b+1)) {
+			
+			int total1 = 0;
+			for(int t = currentAt1; t <= currentAt2; t++) {
+				total1 += t;
+			}
+			sum1.add(total1);
+			
+			currentAt1 += 40;
+			currentAt2 = (currentAt1 -1) + q;
+		}
+		return sum1;
+	}
+	
+	private static List<Integer> doCalculations2() {
+		List<Integer>  sum2 = new ArrayList<Integer>();
+		int currentAt1 = a;
+		int currentAt2 = (currentAt1 -1) + q;
+		
+		//adding b by 1 because i need to do calculations even if i reach 500, or whatever b the user will provide.
+		while (currentAt2 < (b+1)) {
+			
+			int total1 = 0;
+			for(int t = a; t <= currentAt2; t++) {
+				total1 += t;
+			}
+			sum2.add(total1);
+			
+			currentAt1 += 40;
+			currentAt2 = (currentAt1 -1) + q;
+		}
+		return sum2;
+	}
+}

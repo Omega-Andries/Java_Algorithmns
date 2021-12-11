@@ -1,0 +1,3 @@
+module MusicApp {
+	requires javazoom;
+}

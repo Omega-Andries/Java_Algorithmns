@@ -1,0 +1,38 @@
+import java.util.Scanner;
+
+public class ALG_GRD_002a {
+	
+	private static Scanner scanInput = new Scanner(System.in);
+	
+	//make important variables accesseble by all functions in the class
+	private static int a;
+	private static int b;
+	private static int q;
+	
+	public static void main(String[] args) {
+		/**
+		 * Prompt users to insert values they require (a, b and q)
+		 * 
+		 */
+		
+		enterValues();
+		
+		//validate the entered values
+		validateEnteredVariables();
+	}
+	
+	private static void validateEnteredVariables() {
+		if(a < 1) {
+			
+		}
+	}
+	
+	private static void enterValues() {
+		System.out.print("Please provide the minimum whole number ('a'): ");a = scanInput.nextInt();
+		System.out.println();//For neatness reasons i prefere to skip a line
+		System.out.print("Please provide the maximum whole number ('b'): ");b = scanInput.nextInt();
+		System.out.println();
+		System.out.print("Please provide batching constant ('q'): "); q = scanInput.nextInt();
+		System.out.println();
+	}
+}

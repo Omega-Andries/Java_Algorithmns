@@ -1,0 +1,95 @@
+import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Anagram {
+
+	public static void main(String[] args) {
+		System.out.println(makeAnagram("eov", "cehovy"));
+	}
+	
+    static int makeAnagram(String a, String b) {
+    	int nDelete = 0;
+    	/*
+    	 * Turn The strings to character arrays for better manipulation
+    	 */
+    	char[] aC = a.toCharArray();
+    	char[] bC = b.toCharArray();
+    	
+    	Arrays.sort(aC);Arrays.sort(bC);//sort the arrays to know if they're anagrams or not
+    	/**
+    	 * Only count if they aren't anagrams(obviously)
+    	 */
+    	System.out.println(String.valueOf(aC));
+    	System.out.println(String.valueOf(bC));
+    
+    	if(!String.valueOf(aC).equals(String.valueOf(bC))){
+    		//Check length to reduce complexity incase they are the same length
+    		if(aC.length < bC.length) {
+    			//if b has more characters than a
+    			
+    			//check if the first letters of bC are not a
+    			if(String.valueOf(aC).equals(String.valueOf(bC, 0, aC.length))) {
+    				nDelete = bC.length - aC.length;//then we just remove all remaining characters
+    			}else {
+    				for(int i =0 ; i < bC.length; i++) {
+    					//We make use of regular expression to ensure that a character exists or not in both arrays
+    					Pattern patternA = Pattern.compile("[^" +bC[i]+ "]*" + bC[i]);
+    					Matcher matchA = patternA.matcher(a);
+    					Matcher matchB = patternA.matcher(b);
+    					if(!matchA.find()) {
+    						
+    						while(matchB.find()) {
+    							nDelete++;
+    						}
+    					
+    					}
+    					
+    					
+    	
+    				}
+    				
+    				
+    			}
+    		}else if(bC.length < aC.length) {
+    			// if b has more characters than a
+//if a has more characters than b
+    			
+    			//check if the first letters of aC are not b
+    			if(String.valueOf(bC).equals(String.valueOf(aC, 0, bC.length))) {
+    				nDelete = aC.length - bC.length;//then we just remove all remaining characters
+    			}else {
+    				for(int i =0 ; i < aC.length; i++) {
+    					//We make use of regular expression to ensure that a character exists or not in both arrays
+    					Pattern patternA = Pattern.compile("[^" +aC[i]+ "]*" + aC[i]);
+    					Matcher matchA = patternA.matcher(b);
+    					
+    					if(!matchA.find()) {
+    						
+    						nDelete++;
+    					}
+    				}
+    			}
+    		}else {
+    			//if they are the same characters
+    			for(int i =0 ; i < aC.length; i++) {
+					//We make use of regular expression to ensure that a character exists or not in both arrays
+					Pattern patternA = Pattern.compile("[^" +aC[i]+ "]*" + aC[i]);
+					Matcher matchA = patternA.matcher(b);
+					
+					Pattern patternB = Pattern.compile("[^" +bC[i]+ "]*" + bC[i]);
+					Matcher matchB = patternA.matcher(a);
+					if(!matchA.find()) {
+						
+						nDelete++;
+					}
+					
+					if(!matchB.find()) {
+						nDelete++;
+					}
+				}
+    		}
+    	}
+    	return nDelete;
+    }
+}
